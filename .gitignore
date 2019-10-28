@@ -8,3 +8,4 @@ dist
 tags
 dist
 .cache
+node_modules
