@@ -19,7 +19,7 @@ function create(root) {
   return canvas;
 }
 
-function getRandomArbitrary(min, max) {
+function getRandomBetween(min, max) {
   const amount = Math.random() * (max - min) + min;
   const sign = Math.random() < 0.4 ? -1 : 1;
   return sign * amount;
@@ -30,10 +30,8 @@ function rint(min, max) {
   return Math.round(amount);
 }
 
-function getCirclePoints(count, base, radius) {
-  // const angles = [0, 45, 90, 135, 180, 225, 270, 315]; // randomize gaps (360 omitted)
-  let angles = [0, 90, 180, 270]; // randomize gaps (360 omitted)
-  angles = [
+function getCirclePoints(base, radius) {
+  const angles = [
     rint(0, 90 - 45),
     rint(90, 180 - 45),
     rint(180, 270 - 45),
@@ -43,7 +41,7 @@ function getCirclePoints(count, base, radius) {
   for (let a in angles) {
     const angle = (angles[a] * Math.PI) / 180;
     let ba = ((angles[a] - 20) * Math.PI) / 180;
-    let rr = radius + getRandomArbitrary(40, 100);
+    let rr = radius + getRandomBetween(40, 100);
     positions.push({
       x: base.x + radius * Math.sin(angle),
       y: base.y + radius * Math.cos(angle),
@@ -82,7 +80,7 @@ function drawPath(ctx, points) {
 }
 
 function drawBlob(ctx) {
-  let points = getCirclePoints(null, { x: 300, y: 300 }, 150);
+  let points = getCirclePoints({ x: 300, y: 300 }, 150);
   if (prevPoints === null) {
     drawPath(ctx, points);
   } else {
